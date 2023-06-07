@@ -6,7 +6,7 @@ import { Avatar, Button, Navbar } from 'flowbite-react'
 
 function NavBar() {
 
-    const user = true
+    const user = false
 
     return (
         <div>
@@ -40,29 +40,29 @@ function NavBar() {
                                     </p>
                                 </Button>
                             </> :
-                                <Button
-                                    className='ml-2'
-                                    gradientDuoTone="purpleToBlue"
-                                >
-                                    <p>
-                                        Login
-                                    </p>
-                                </Button>
+                                <Link to="/login">
+                                    <Button
+                                        className='ml-2'
+                                        gradientDuoTone="purpleToBlue"
+                                    >
+                                        <p>
+                                            Login
+                                        </p>
+                                    </Button>
+                                </Link>
                         }
                         <Navbar.Toggle />
                     </div>
                     <Navbar.Collapse>
                         {
-                            user ? <div className='mb-3 space-y-2 flex flex-col justify-center items-center'>
+                            user ? <div className='mb-3 space-y-2 flex flex-col justify-center items-center lg:hidden'>
                                 <Avatar
-                                    className='block lg:hidden'
                                     // title={user.displayName ? user.displayName : "User Name"}
                                     bordered
                                     img="/images/people/profile-picture-5.jpg"
                                     rounded
                                 />
                                 <Button
-                                    className='ml-2 block lg:hidden'
                                     gradientDuoTone="purpleToBlue"
                                 >
                                     <p>
@@ -70,14 +70,15 @@ function NavBar() {
                                     </p>
                                 </Button>
                             </div> :
-                                <Button
-                                    className='ml-2'
-                                    gradientDuoTone="purpleToBlue"
-                                >
-                                    <p>
-                                        Login
-                                    </p>
-                                </Button>
+                                <Link to="/login" className='block lg:hidden'>
+                                    <Button
+                                        gradientDuoTone="purpleToBlue"
+                                    >
+                                        <p>
+                                            Login
+                                        </p>
+                                    </Button>
+                                </Link>
                         }
                         <li>
                             <Link to="/" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</Link>
