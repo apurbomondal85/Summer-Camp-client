@@ -4,6 +4,7 @@ import Banner from '../Banner/Banner'
 import PopularClasses from '../PopularClasses/PopularClasses'
 import PopularInstructor from '../PopularInstructor/PopularInstructor'
 import Blogs from '../Blogs/Blogs'
+import Overview from '../Overview/Overview'
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
       <PopularClasses></PopularClasses>
       <PopularInstructor></PopularInstructor>
       <Blogs></Blogs>
+      <Overview></Overview>
     </div>
   )
 }

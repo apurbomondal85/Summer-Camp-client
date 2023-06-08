@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 function Blogs() {
     const [blogs, setBlogs] = useState([]);
     useEffect(() => {
-        fetch('blog.json')
+        fetch('http://localhost:5000/blogs')
             .then(res => res.json())
             .then(data => {
                 setBlogs(data)
@@ -18,9 +18,9 @@ function Blogs() {
                 {
                     blogs.map(item =>
 
-                        <div key={item.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div key={item.id} className="bg-white rounded-lg">
                                 <img className="rounded-t-lg w-full h-[250px]" src={item?.imageUrl} alt="" />
-                            <div className="p-5 text-center">
+                            <div className=" py-5 text-center">
                                     <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{item?.title}</h5>
                                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{item?.excerpt}</p>
                                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">{item?.date}</p>
