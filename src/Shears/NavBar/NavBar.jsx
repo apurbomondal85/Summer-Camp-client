@@ -1,12 +1,16 @@
 
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.jpg'
 import { Avatar, Button, Navbar } from 'flowbite-react'
+import { AuthContext } from '../../Provider/AuthProvider'
 
 function NavBar() {
+    const {user, logOut} = useContext(AuthContext)
 
-    const user = false
+    const handleLogOut = () =>{
+        logOut().then().catch();
+    }
 
     return (
         <div>
@@ -32,6 +36,7 @@ function NavBar() {
                                     rounded
                                 />
                                 <Button
+                                onClick={handleLogOut}
                                     className='ml-2 hidden lg:block'
                                     gradientDuoTone="purpleToBlue"
                                 >
@@ -63,6 +68,7 @@ function NavBar() {
                                     rounded
                                 />
                                 <Button
+                                onClick={handleLogOut}
                                     gradientDuoTone="purpleToBlue"
                                 >
                                     <p>
