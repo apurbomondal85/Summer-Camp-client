@@ -30,9 +30,9 @@ function NavBar() {
                             user ? <>
                                 <Avatar
                                     className='hidden lg:block'
-                                    // title={user.displayName ? user.displayName : "User Name"}
+                                    title={user.displayName ? user.displayName : "User Name"}
                                     bordered
-                                    img="/images/people/profile-picture-5.jpg"
+                                    img={user?.photoURL}
                                     rounded
                                 />
                                 <Button
