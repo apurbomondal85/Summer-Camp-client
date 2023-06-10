@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import img from '../assets/images/logo.jpg'
 
 function Dashboard() {
@@ -17,7 +17,7 @@ function Dashboard() {
                     <img src={img} className=' h-8 lg:h-12 my-8' alt="" />
                     <ul className="space-y-2 font-medium">
                         <li>
-                            <Link className='text-slate-700 font-semibold'>Selected Class</Link>
+                            <Link to="/dashboard/selected" className='text-slate-700 font-semibold'>Selected Class</Link>
                         </li>
                         <li>
                             <Link className='text-slate-700 font-semibold'>Enrolled Class</Link>
@@ -38,7 +38,7 @@ function Dashboard() {
             </aside>
 
             <div className="p-4 sm:ml-64">
-                
+                <Outlet />
             </div>
 
         </div>
