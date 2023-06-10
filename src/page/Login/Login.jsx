@@ -21,6 +21,7 @@ function Login() {
         login(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                postUser(user)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -33,10 +34,24 @@ function Login() {
         google()
             .then((result) => {
                 const user = result.user;
+                postUser(user)
             }).catch((error) => {
                 const errorCode = error.code;
                 setError(errorCode)
             });
+    }
+
+    const postUser = (user) => {
+        const { displayName, email } = user;
+        fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ name: displayName, email, role: "user" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
 
     return (

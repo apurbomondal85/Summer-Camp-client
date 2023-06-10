@@ -8,7 +8,7 @@ import img from '../../assets/images/login.jpg'
 import { AuthContext } from '../../Provider/AuthProvider';
 
 function Register() {
-    const { registers, google } = useContext(AuthContext);
+    const { registers, google, updateUser } = useContext(AuthContext);
     const [show, setShow] = useState(false)
     const [match, setMatch] = useState(false);
     const [error, setError] = useState();
@@ -21,7 +21,7 @@ function Register() {
         const password = data.password;
         const confirmPass = data.confirmPass;
         const photo = data.photo;
-        
+
         setMatch(false)
         setPassError('')
         if (!/[!@#$%^&*][A-Z]/.test(password) || password.length < 6) {
@@ -35,6 +35,9 @@ function Register() {
         registers(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                updateUser(user,name, photo).then(() => postUser(user)).catch();
+                setError('')
+
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -45,12 +48,27 @@ function Register() {
 
     const handleGoogle = () => {
         google()
-        .then((result) => {
-            const user = result.user;
-          }).catch((error) => {
-            const errorCode = error.code;
-            setError(errorCode)
-          });
+            .then((result) => {
+                const user = result.user;
+                postUser(user)
+            }).catch((error) => {
+                const errorCode = error.code;
+                setError(errorCode)
+            });
+    }
+
+    const postUser = (user) => {
+        console.log(user);
+        const { displayName, email } = user;
+        fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ name: displayName, email, role: "user" })
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
 
     return (
