@@ -1,6 +1,8 @@
 
 import React, { useEffect, useState } from 'react'
 import ClassCard from './ClassCard';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Classes() {
     const [classes, setClasses] = useState([]);
@@ -20,6 +22,7 @@ function Classes() {
                     classes.map(item => <ClassCard key={item._id} item={item}></ClassCard>)
                 }
             </div>
+            <ToastContainer />
         </div>
     )
 }
