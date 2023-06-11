@@ -6,7 +6,7 @@ function Instructors() {
     const [instructor, setInstructor] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/instructors")
+        fetch("http://localhost:5000/instructors/instructor")
             .then(res => res.json())
             .then(data => {
                 setInstructor(data)

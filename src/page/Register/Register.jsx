@@ -36,6 +36,7 @@ function Register() {
                 const user = userCredential.user;
                 updateUser(user,name, photo).then(() => postUser(user)).catch();
                 setError('')
+                reset()
 
             })
             .catch((error) => {
@@ -57,13 +58,13 @@ function Register() {
     }
 
     const postUser = (user) => {
-        const { displayName, email } = user;
+        const { displayName, email, photoURL } = user;
         fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
             },
-            body: JSON.stringify({ name: displayName, email, role: "user" })
+            body: JSON.stringify({ name: displayName, email, role: "user", image: photoURL })
         })
             .then(res => res.json())
             .then(data => console.log(data))

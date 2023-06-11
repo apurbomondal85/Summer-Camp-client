@@ -50,10 +50,10 @@ function Dashboard() {
                                 </ul> : currentUser?.role === "admin" &&
                                 <ul className="space-y-2 font-medium">
                                     <li>
-                                        <Link className='text-slate-700 font-semibold'>Selected Class</Link>
+                                        <Link to="/dashboard/manageClasses" className='text-slate-700 font-semibold'>Manage Classes</Link>
                                     </li>
                                     <li>
-                                        <Link className='text-slate-700 font-semibold'>Enrolled Class</Link>
+                                        <Link className='text-slate-700 font-semibold'>Manage Users</Link>
                                     </li>
                                 </ul>
 
@@ -75,7 +75,7 @@ function Dashboard() {
             <div className="p-4 sm:ml-64">
                 <Outlet />
             </div>
-
+                
         </div>
     )
 }

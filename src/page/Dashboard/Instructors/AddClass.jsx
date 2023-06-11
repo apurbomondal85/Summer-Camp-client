@@ -37,6 +37,7 @@ function AddClass() {
                             position: "top-right",
                             autoClose: 1000
                         })
+                        reset();
                     }
                 })
         }

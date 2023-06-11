@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../Provider/AuthProvider';
 import { Button } from 'flowbite-react';
-import { FaTrash } from 'react-icons/fa';
+import Swal from 'sweetalert2';
 
 function MyClass() {
     const { user } = useContext(AuthContext)
@@ -17,6 +17,12 @@ function MyClass() {
                 })
         }
     }, [user])
+
+    const handleFeedback = (feedback) => {
+        if (feedback) {
+            Swal.fire(`${feedback}`)
+        }
+    }
 
     return (
         <div className='p-32'>
@@ -58,7 +64,7 @@ function MyClass() {
                                     {item?.status}
                                 </td>
                                 <td className="px-6 py-4 flex items-center gap-2">
-                                    <Button gradientDuoTone="cyanToBlue">
+                                    <Button onClick={() => handleFeedback(item?.feedback)} gradientDuoTone="cyanToBlue">
                                         Feedback
                                     </Button>
                                 </td>

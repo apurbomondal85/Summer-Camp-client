@@ -22,6 +22,7 @@ function Login() {
             .then((userCredential) => {
                 const user = userCredential.user;
                 postUser(user)
+                reset()
             })
             .catch((error) => {
                 const errorCode = error.code;
