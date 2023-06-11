@@ -1,11 +1,13 @@
 
-import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import FeedbackModal from './FeedbackModal';
+import { Button } from 'flowbite-react';
 
 function ManageClass() {
     const [classes, setClasses] = useState([]);
     const [auto, setAuto] = useState('');
+    const [id, setId] = useState('');
     const [openModal, setOpenModal] = useState();
     const props = { openModal, setOpenModal };
 
@@ -45,10 +47,9 @@ function ManageClass() {
             })
     }
 
-    const handleFeedback = (e) =>{
-        e.preventDefault();
-        const feedback = e.target.feedback.value;
-        console.log(feedback);
+    const handleFeedbackBtn = (id) => {
+        props.setOpenModal('form-elements')
+        setId(id)
     }
 
     return (
@@ -121,7 +122,7 @@ function ManageClass() {
                                     <Button disabled={item?.status !== "pending" ? true : false} onClick={() => handleDeny(item?._id)} gradientDuoTone="purpleToPink">
                                         Deny
                                     </Button>
-                                    <Button onClick={() => props.setOpenModal('form-elements')} gradientDuoTone="greenToBlue">
+                                    <Button onClick={() => handleFeedbackBtn(item?._id)} gradientDuoTone="greenToBlue">
                                         Feedback
                                     </Button>
                                 </td>
@@ -130,22 +131,8 @@ function ManageClass() {
                         }
                     </tbody>
                 </table>
+                <FeedbackModal props={props} id={id}></FeedbackModal>
             </div>
-            <Modal show={props.openModal === 'form-elements'} size="md" popup onClose={() => props.setOpenModal(undefined)}>
-                <Modal.Header />
-                <Modal.Body>
-                    <form onSubmit={handleFeedback} className="space-y-6">
-                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Please Your Feedback</h3>
-                        <div>
-                            <div className="mb-2 block">
-                                <Label htmlFor="feedback" value="Your feedback" />
-                            </div>
-                            <textarea className='w-full h-32 focus:border-none outline-none border border-gray-200 rounded-xl shadow-xl' name="feedback" id="feedback"></textarea>
-                        </div>
-                        <Button type='submit' gradientDuoTone="purpleToBlue">Feedback</Button>
-                    </form>
-                </Modal.Body>
-            </Modal>
             <ToastContainer />
         </div>
     )
