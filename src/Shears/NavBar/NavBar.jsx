@@ -8,7 +8,6 @@ import { AuthContext } from '../../Provider/AuthProvider'
 function NavBar() {
     const { user, logOut } = useContext(AuthContext)
     const [currentUser, setCurrentUser] = useState({});
-    console.log(user);
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:5000/users/${user.email}`)

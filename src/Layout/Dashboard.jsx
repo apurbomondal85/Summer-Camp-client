@@ -53,7 +53,7 @@ function Dashboard() {
                                         <Link to="/dashboard/manageClasses" className='text-slate-700 font-semibold'>Manage Classes</Link>
                                     </li>
                                     <li>
-                                        <Link className='text-slate-700 font-semibold'>Manage Users</Link>
+                                        <Link to="/dashboard/manageUsers" className='text-slate-700 font-semibold'>Manage Users</Link>
                                     </li>
                                 </ul>
 

@@ -52,7 +52,7 @@ function Login() {
             body: JSON.stringify({ name: displayName, email, role: "user" })
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data)
     }
 
     return (

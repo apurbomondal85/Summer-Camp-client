@@ -37,7 +37,7 @@ function ManageClass() {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.modifiedCount) {
+                if (data.modifiedCount > 0) {
                     toast('Class is approved', {
                         position: "top-right",
                         autoClose: 1000,

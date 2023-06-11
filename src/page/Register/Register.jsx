@@ -67,7 +67,7 @@ function Register() {
             body: JSON.stringify({ name: displayName, email, role: "user", image: photoURL })
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data)
     }
 
     return (
