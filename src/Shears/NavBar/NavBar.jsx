@@ -1,14 +1,24 @@
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import logo from '../../assets/images/logo.jpg'
 import { Avatar, Button, Navbar } from 'flowbite-react'
 import { AuthContext } from '../../Provider/AuthProvider'
 
 function NavBar() {
-    const {user, logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+    const [currentUser, setCurrentUser] = useState({});
+    useEffect(() => {
+        if (user?.email) {
+            fetch(`http://localhost:5000/users/${user.email}`)
+                .then(res => res.json())
+                .then(data => {
+                    setCurrentUser(data);
+                })
+        }
+    }, [user])
 
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         logOut().then().catch();
     }
 
@@ -36,7 +46,7 @@ function NavBar() {
                                     rounded
                                 />
                                 <Button
-                                onClick={handleLogOut}
+                                    onClick={handleLogOut}
                                     className='ml-2 hidden lg:block'
                                     gradientDuoTone="purpleToBlue"
                                 >
@@ -68,7 +78,7 @@ function NavBar() {
                                     rounded
                                 />
                                 <Button
-                                onClick={handleLogOut}
+                                    onClick={handleLogOut}
                                     gradientDuoTone="purpleToBlue"
                                 >
                                     <p>
@@ -97,7 +107,7 @@ function NavBar() {
                         </li>
                         <li>
                             {
-                                user && <Link to="/dashboard" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</Link>
+                                user && <Link to={currentUser.role === "user" ? "/dashboard/selected" : currentUser?.role === "instructor" ? "/dashboard/addClass" : currentUser?.role === "admin" && "/dashboard/manageClasses"} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Dashboard</Link>
                             }
                         </li>
                     </Navbar.Collapse>
