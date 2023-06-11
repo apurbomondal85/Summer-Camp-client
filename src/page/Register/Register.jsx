@@ -21,7 +21,6 @@ function Register() {
         const password = data.password;
         const confirmPass = data.confirmPass;
         const photo = data.photo;
-
         setMatch(false)
         setPassError('')
         if (!/[!@#$%^&*][A-Z]/.test(password) || password.length < 6) {
@@ -58,7 +57,6 @@ function Register() {
     }
 
     const postUser = (user) => {
-        console.log(user);
         const { displayName, email } = user;
         fetch("http://localhost:5000/users", {
             method: "POST",

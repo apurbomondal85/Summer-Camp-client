@@ -28,7 +28,7 @@ function AddClass() {
                 headers: {
                     "content-type": "application/json"
                 },
-                body: JSON.stringify({ name, email, className, availableSeats, price, image: imgData.data.display_url })
+                body: JSON.stringify({ instructor: name, email, className, availableSeats, price, image: imgData.data.display_url, status: 'pending', totalEnroll: 0, feedback: '' })
             })
                 .then(res => res.json())
                 .then(data => {

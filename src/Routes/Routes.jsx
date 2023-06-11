@@ -8,6 +8,7 @@ import Dashboard from "../Layout/Dashboard";
 import Classes from "../page/Classes/Classes";
 import SelectedClass from "../page/Dashboard/Users/SelectedClass";
 import AddClass from "../page/Dashboard/Instructors/AddClass";
+import MyClass from "../page/Dashboard/Instructors/MyClass";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/addClass',
                 element: <AddClass />
+            },
+            {
+                path: '/dashboard/myClass',
+                element: <MyClass />
             },
         ]
     }

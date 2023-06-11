@@ -8,6 +8,7 @@ import { AuthContext } from '../../Provider/AuthProvider'
 function NavBar() {
     const { user, logOut } = useContext(AuthContext)
     const [currentUser, setCurrentUser] = useState({});
+    console.log(user);
     useEffect(() => {
         if (user?.email) {
             fetch(`http://localhost:5000/users/${user.email}`)
@@ -40,7 +41,7 @@ function NavBar() {
                             user ? <>
                                 <Avatar
                                     className='hidden lg:block'
-                                    title={user.displayName ? user.displayName : "User Name"}
+                                    title={user?.displayName ? user.displayName : "User Name"}
                                     bordered
                                     img={user?.photoURL}
                                     rounded
@@ -72,9 +73,9 @@ function NavBar() {
                         {
                             user ? <div className='mb-3 space-y-2 flex flex-col justify-center items-center lg:hidden'>
                                 <Avatar
-                                    // title={user.displayName ? user.displayName : "User Name"}
+                                    title={user.displayName ? user.displayName : "User Name"}
                                     bordered
-                                    img="/images/people/profile-picture-5.jpg"
+                                    img={user?.photoURL}
                                     rounded
                                 />
                                 <Button
