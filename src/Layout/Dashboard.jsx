@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 import img from '../assets/images/logo.jpg'
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
+import { FaBook, FaBookOpen, FaBookmark, FaEdit, FaFileAlt, FaHome, FaPersonBooth, FaRegSun } from 'react-icons/fa';
 
 function Dashboard() {
     const { user } = useContext(AuthContext)
@@ -33,40 +34,40 @@ function Dashboard() {
                         currentUser?.role === "user" ?
                             <ul className="space-y-2 font-medium">
                                 <li>
-                                    <Link to="/dashboard/selected" className='text-slate-700 font-semibold'>Selected Class</Link>
+                                    <Link to="/dashboard/selected" className='text-slate-700 font-semibold flex items-center gap-1'><FaBookmark /> Selected Class</Link>
                                 </li>
                                 <li>
-                                    <Link className='text-slate-700 font-semibold'>Enrolled Class</Link>
+                                    <Link to="/dashboard/enrollClass" className='text-slate-700 font-semibold flex items-center gap-1'><FaFileAlt></FaFileAlt> Enrolled Class</Link>
                                 </li>
                             </ul>
                             : currentUser?.role === "instructor" ?
                                 <ul className="space-y-2 font-medium">
                                     <li>
-                                        <Link to="/dashboard/addClass" className='text-slate-700 font-semibold'>Add Class</Link>
+                                        <Link to="/dashboard/addClass" className='text-slate-700 font-semibold flex items-center gap-1'><FaEdit></FaEdit> Add Class</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard/myClass" className='text-slate-700 font-semibold'>My Class</Link>
+                                        <Link to="/dashboard/myClass" className='text-slate-700 font-semibold flex items-center gap-1'><FaBook></FaBook> My Class</Link>
                                     </li>
                                 </ul> : currentUser?.role === "admin" &&
                                 <ul className="space-y-2 font-medium">
                                     <li>
-                                        <Link to="/dashboard/manageClasses" className='text-slate-700 font-semibold'>Manage Classes</Link>
+                                        <Link to="/dashboard/manageClasses" className='text-slate-700 font-semibold flex items-center gap-1'><FaRegSun></FaRegSun> Manage Classes</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard/manageUsers" className='text-slate-700 font-semibold'>Manage Users</Link>
+                                        <Link to="/dashboard/manageUsers" className='text-slate-700 font-semibold flex items-center gap-1'>Manage Users</Link>
                                     </li>
                                 </ul>
 
                     }
                     <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                         <li>
-                            <Link to="/" className='text-slate-700 font-semibold'>Home</Link>
+                            <Link to="/" className='text-slate-700 font-semibold flex items-center gap-1'><FaHome></FaHome> Home</Link>
                         </li>
                         <li>
-                            <Link to="/instructors" className='text-slate-700 font-semibold'>Instructors</Link>
+                            <Link to="/instructors" className='text-slate-700 font-semibold flex items-center gap-1'><FaPersonBooth /> Instructors</Link>
                         </li>
                         <li>
-                            <Link to="/classes" className='text-slate-700 font-semibold'>Classes</Link>
+                            <Link to="/classes" className='text-slate-700 font-semibold flex items-center gap-1'><FaBookOpen></FaBookOpen> Classes</Link>
                         </li>
                     </ul>
                 </div>
@@ -75,7 +76,7 @@ function Dashboard() {
             <div className="p-4 sm:ml-64">
                 <Outlet />
             </div>
-                
+
         </div>
     )
 }

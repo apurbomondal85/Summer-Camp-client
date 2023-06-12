@@ -2,9 +2,11 @@
 import { data } from 'autoprefixer'
 import { Button } from 'flowbite-react'
 import React, { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
 
 function ManageUsers() {
     const [users, setUsers] = useState([])
+    const [auto, setAuto] = useState()
 
     useEffect(() => {
         fetch("http://localhost:5000/users")
@@ -12,14 +14,17 @@ function ManageUsers() {
             .then(data => {
                 setUsers(data)
             })
-    }, [])
+    }, [auto])
 
-    const handleInstructor = (email) => {
-        updateRole(email, "instructor")
+    const handleInstructor = (id) => {
+        updateRole(id, "instructor")
+    }
+    const handleAdmin = (id) => {
+        updateRole(id, "admin")
     }
 
-    const updateRole = (email, role) => {
-        fetch(`http://localhost:5000/users?email=${email}`, {
+    const updateRole = (id, role) => {
+        fetch(`http://localhost:5000/users/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"
@@ -29,7 +34,7 @@ function ManageUsers() {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    toast('Class is approved', {
+                    toast('Role update success', {
                         position: "top-right",
                         autoClose: 1000,
                     });
@@ -85,10 +90,10 @@ function ManageUsers() {
                                     {item?.role}
                                 </td>
                                 <td className="px-6 py-4 flex flex-col gap-2">
-                                    <Button onClick={() => handleInstructor(item?.email)} disabled={false} gradientDuoTone="purpleToBlue">
+                                    <Button onClick={() => handleInstructor(item?._id)} gradientDuoTone="purpleToBlue">
                                         Make Instructor
                                     </Button>
-                                    <Button disabled={false} gradientDuoTone="purpleToPink">
+                                    <Button onClick={() => handleAdmin(item?._id)} gradientDuoTone="purpleToPink">
                                         Make Admin
                                     </Button>
                                 </td>
@@ -98,6 +103,7 @@ function ManageUsers() {
                     </tbody>
                 </table>
             </div>
+            <ToastContainer />
         </div>
     )
 }

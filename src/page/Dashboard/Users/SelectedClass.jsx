@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../../Provider/AuthProvider'
 import { Button } from 'flowbite-react'
-import { FaTrash } from 'react-icons/fa'
+import { FaCreditCard, FaTrash } from 'react-icons/fa'
 import Swal from 'sweetalert2'
+import { Link } from 'react-router-dom'
 
 function SelectedClass() {
     const { user } = useContext(AuthContext)
@@ -89,9 +90,7 @@ function SelectedClass() {
                                 </td>
                                 <td className="px-6 py-4 flex items-center gap-2">
                                     <Button onClick={() => handleDelete(item._id)} gradientDuoTone="purpleToBlue"><FaTrash className='text-xl' /></Button>
-                                    <Button gradientDuoTone="cyanToBlue">
-                                        PAY
-                                    </Button>
+                                    <Link to={`/dashboard/payment/${item?._id}`}><Button gradientDuoTone="cyanToBlue"><FaCreditCard className='text-xl'></FaCreditCard></Button></Link>
                                 </td>
                             </tr>
                             )

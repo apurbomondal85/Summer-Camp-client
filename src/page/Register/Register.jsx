@@ -2,7 +2,7 @@
 import { Button } from 'flowbite-react'
 import { useContext, useState } from 'react'
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import img from '../../assets/images/login.jpg'
 import { AuthContext } from '../../Provider/AuthProvider';
@@ -14,6 +14,9 @@ function Register() {
     const [error, setError] = useState();
     const [passError, setPassError] = useState('');
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
 
     const onSubmit = data => {
         const name = data.name;
@@ -37,7 +40,7 @@ function Register() {
                 updateUser(user,name, photo).then(() => postUser(user)).catch();
                 setError('')
                 reset()
-
+                navigate(from)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -51,6 +54,7 @@ function Register() {
             .then((result) => {
                 const user = result.user;
                 postUser(user)
+                navigate(from)
             }).catch((error) => {
                 const errorCode = error.code;
                 setError(errorCode)

@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import img from '../../assets/images/login.jpg'
 import { useContext, useState } from "react";
 import { Button } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from 'react-hook-form';
 
@@ -12,6 +12,9 @@ function Login() {
     const [show, setShow] = useState(false)
     const [error, setError] = useState('');
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location.state?.from?.pathname || '/';
 
     const onSubmit = (data) => {
         const email = data.email;
@@ -23,6 +26,7 @@ function Login() {
                 const user = userCredential.user;
                 postUser(user)
                 reset()
+                navigate(from)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -36,6 +40,7 @@ function Login() {
             .then((result) => {
                 const user = result.user;
                 postUser(user)
+                navigate(from)
             }).catch((error) => {
                 const errorCode = error.code;
                 setError(errorCode)
