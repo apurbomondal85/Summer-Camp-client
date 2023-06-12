@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 
 function PopularClasses() {
     const [classes, setClasses] = useState([]);
-
     useEffect(() => {
         fetch("http://localhost:5000/classes")
             .then(res => res.json())
@@ -34,7 +33,7 @@ function PopularClasses() {
             >
                 {
                     classes.map(item => <SwiperSlide className="relative rounded-xl overflow-hidden">
-                        <img src={item.image} className="h-full w-full" alt="" />
+                        <img src={item?.image} className="h-full w-full" alt="" />
                         <div className="bg-[rgba(0,0,0,0.6)] h-full w-full absolute top-0 left-0 flex justify-center items-center">
                             <p className="text-white font-bold text-xl">{item?.className}</p>
                         </div>

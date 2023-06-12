@@ -16,6 +16,7 @@ function CheckoutForm({ price }) {
             headers: {},
             headers: {
                 "content-type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("secret-key")}`,
             },
             body: JSON.stringify({ price }),
         })

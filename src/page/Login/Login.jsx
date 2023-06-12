@@ -6,6 +6,7 @@ import { Button } from "flowbite-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useForm } from 'react-hook-form';
+import { motion } from 'framer-motion';
 
 function Login() {
     const { login, google } = useContext(AuthContext)
@@ -15,7 +16,6 @@ function Login() {
     const location = useLocation()
     const navigate = useNavigate()
     const from = location.state?.from?.pathname || '/';
-
     const onSubmit = (data) => {
         const email = data.email;
         const password = data.password;
@@ -24,9 +24,9 @@ function Login() {
         login(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                navigate(from)
                 postUser(user)
                 reset()
-                navigate(from)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -39,8 +39,8 @@ function Login() {
         google()
             .then((result) => {
                 const user = result.user;
-                postUser(user)
                 navigate(from)
+                postUser(user)
             }).catch((error) => {
                 const errorCode = error.code;
                 setError(errorCode)
@@ -62,7 +62,13 @@ function Login() {
 
     return (
         <div className='container flex flex-col lg:flex-row justify-center items-center gap-8'>
-            <form onSubmit={handleSubmit(onSubmit)} className='basis-[50%]'>
+            <motion.form
+                className='basis-[50%]'
+                onSubmit={handleSubmit(onSubmit)}
+                initial={{ x: -500 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 1 }}
+            >
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                     <input type="email" id="email" {...register("email")} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="xyz@gmail.com" required />
@@ -93,9 +99,15 @@ function Login() {
                 <div className="flex justify-center mt-6 py-1 bg-blue-700">
                     <span onClick={handleGoogle} className='flex justify-center items-center p-4 bg-white text-blue-700 rounded-full cursor-pointer'><FaGoogle></FaGoogle></span>
                 </div>
-            </form>
+            </motion.form>
             <div className="basis-[50%]">
-                <img src={img} alt="login image" />
+                <motion.img
+                    src={img}
+                    alt="Moving Image"
+                    initial={{ x: 500 }}
+                    animate={{ x: 0 }}
+                    transition={{ duration: 1 }}
+                />
             </div>
         </div>
     )

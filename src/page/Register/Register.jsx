@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form';
 import img from '../../assets/images/login.jpg'
 import { AuthContext } from '../../Provider/AuthProvider';
+import { motion } from 'framer-motion';
 
 function Register() {
     const { registers, google, updateUser } = useContext(AuthContext);
@@ -37,10 +38,10 @@ function Register() {
         registers(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                updateUser(user,name, photo).then(() => postUser(user)).catch();
+                updateUser(user, name, photo).then(() => postUser(user)).catch();
+                navigate(from)
                 setError('')
                 reset()
-                navigate(from)
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -53,8 +54,8 @@ function Register() {
         google()
             .then((result) => {
                 const user = result.user;
-                postUser(user)
                 navigate(from)
+                postUser(user)
             }).catch((error) => {
                 const errorCode = error.code;
                 setError(errorCode)
@@ -76,7 +77,13 @@ function Register() {
 
     return (
         <div className='container flex flex-col lg:flex-row justify-center items-center gap-8 mt-24 py-12'>
-            <form onSubmit={handleSubmit(onSubmit)} className='basis-[50%]'>
+            <motion.form
+                className='basis-[50%]'
+                onSubmit={handleSubmit(onSubmit)}
+                initial={{ x: -500 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 1 }}
+            >
                 <div className="mb-6">
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
                     <input type="text" id="name" name='name' {...register("name")} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your name" required />
@@ -130,9 +137,15 @@ function Register() {
                 <div className="flex justify-center mt-6 py-1 bg-blue-700">
                     <span onClick={handleGoogle} className='flex justify-center items-center p-4 bg-white text-blue-700 rounded-full cursor-pointer'><FaGoogle></FaGoogle></span>
                 </div>
-            </form>
+            </motion.form>
             <div className="basis-[50%]">
-                <img src={img} className='w-full h-full' alt="login image" />
+                <motion.img
+                    src={img}
+                    alt="Moving Image"
+                    initial={{ x: 500 }}
+                    animate={{ x: 0 }}
+                    transition={{ duration: 1 }}
+                />
             </div>
         </div>
     )

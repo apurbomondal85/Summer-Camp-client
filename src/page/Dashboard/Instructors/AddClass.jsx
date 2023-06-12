@@ -22,6 +22,7 @@ function AddClass() {
             body: formData
         });
         const imgData = await response.json();
+        console.log(imgData);
         if (imgData.data.display_url) {
             fetch("http://localhost:5000/classes", {
                 method: 'POST',
