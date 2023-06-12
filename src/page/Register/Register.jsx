@@ -64,7 +64,7 @@ function Register() {
 
     const postUser = (user) => {
         const { displayName, email, photoURL } = user;
-        fetch("http://localhost:5000/users", {
+        fetch("https://summer-camp-server-sepia.vercel.app/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

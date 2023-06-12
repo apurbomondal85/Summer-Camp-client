@@ -11,7 +11,7 @@ function CheckoutForm({ price }) {
     const [cardError, setCardError] = useState('');
     const [clientSecret, setClientSecret] = useState();
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://summer-camp-server-sepia.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {},
             headers: {

@@ -13,7 +13,7 @@ function Payment() {
     const [price, setPrice] = useState(0);
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/selected/${user.email}`)
+            fetch(`https://summer-camp-server-sepia.vercel.app/selected/${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     const cardPrice = data.find(item => item._id === id);

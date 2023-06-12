@@ -6,7 +6,7 @@ function Instructors() {
     const [instructor, setInstructor] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:5000/instructors/instructor")
+        fetch("https://summer-camp-server-sepia.vercel.app/instructors/instructor")
             .then(res => res.json())
             .then(data => {
                 setInstructor(data)

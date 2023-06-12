@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 function PopularClasses() {
     const [classes, setClasses] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:5000/classes")
+        fetch("https://summer-camp-server-sepia.vercel.app/classes")
             .then(res => res.json())
             .then(data => {
                 const popularClass = data.sort((a, b) => b.totalEnrollment - a.totalEnrollment).slice(0, 6);
@@ -22,7 +22,7 @@ function PopularClasses() {
         <div className='py-16 container'>
             <h1 className="text-center text-slate-900 text-4xl font-bold my-4">Popular Classes</h1>
             <Swiper
-                slidesPerView={4}
+                slidesPerView={window.innerWidth < 768 ? 1 : 4}
                 spaceBetween={30}
                 freeMode={true}
                 pagination={{

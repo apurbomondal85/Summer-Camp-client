@@ -7,7 +7,7 @@ function FeedbackModal({ props, id }) {
     const handleFeedback = (e) => {
         e.preventDefault();
         const feedback = e.target.feedback.value;
-        fetch(`http://localhost:5000/Classes?id=${id}`, {
+        fetch(`https://summer-camp-server-sepia.vercel.app/Classes?id=${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

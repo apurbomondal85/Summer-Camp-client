@@ -24,7 +24,7 @@ function AddClass() {
         const imgData = await response.json();
         console.log(imgData);
         if (imgData.data.display_url) {
-            fetch("http://localhost:5000/classes", {
+            fetch("https://summer-camp-server-sepia.vercel.app/classes", {
                 method: 'POST',
                 headers: {
                     "content-type": "application/json"

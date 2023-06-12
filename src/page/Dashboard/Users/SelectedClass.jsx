@@ -11,7 +11,7 @@ function SelectedClass() {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/selected/${user.email}`)
+            fetch(`https://summer-camp-server-sepia.vercel.app/selected/${user.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setSelectedClass(data);
@@ -30,7 +30,7 @@ function SelectedClass() {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/selected/${id}`, {
+                fetch(`https://summer-camp-server-sepia.vercel.app/selected/${id}`, {
                     method: "DELETE",
                 })
                     .then(res => res.json())

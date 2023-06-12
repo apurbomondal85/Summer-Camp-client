@@ -9,7 +9,7 @@ function ManageUsers() {
     const [auto, setAuto] = useState()
 
     useEffect(() => {
-        fetch("http://localhost:5000/users")
+        fetch("https://summer-camp-server-sepia.vercel.app/users")
             .then(res => res.json())
             .then(data => {
                 setUsers(data)
@@ -24,7 +24,7 @@ function ManageUsers() {
     }
 
     const updateRole = (id, role) => {
-        fetch(`http://localhost:5000/users/${id}`, {
+        fetch(`https://summer-camp-server-sepia.vercel.app/users/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

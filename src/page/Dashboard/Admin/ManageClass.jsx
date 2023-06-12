@@ -12,7 +12,7 @@ function ManageClass() {
     const props = { openModal, setOpenModal };
 
     useEffect(() => {
-        fetch("http://localhost:5000/Classes")
+        fetch("https://summer-camp-server-sepia.vercel.app/Classes")
             .then(res => res.json())
             .then(data => {
                 setClasses(data)
@@ -27,7 +27,7 @@ function ManageClass() {
     }
 
     const updateStatus = (id, status) => {
-        fetch(`http://localhost:5000/Classes/${id}`, {
+        fetch(`https://summer-camp-server-sepia.vercel.app/Classes/${id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

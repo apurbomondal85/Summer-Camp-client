@@ -12,7 +12,7 @@ function ClassCard({ item }) {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:5000/users/${user?.email}`)
+            fetch(`https://summer-camp-server-sepia.vercel.app/users/${user?.email}`)
                 .then(res => res.json())
                 .then(data => {
                     setCurrentUser(data)
@@ -24,7 +24,7 @@ function ClassCard({ item }) {
     const handleSelect = (item) => {
         if (user) {
             const selectedClass = { className: item.className, email: currentUser.email, price: item?.price };
-            fetch("http://localhost:5000/selected", {
+            fetch("https://summer-camp-server-sepia.vercel.app/selected", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

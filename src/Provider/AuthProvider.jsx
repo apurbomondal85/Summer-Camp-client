@@ -31,7 +31,7 @@ function AuthProvider({ children }) {
             setLoader(false);
             setUser(user)
             if (user) {
-                axios.post("http://localhost:5000/jwt", { email: user.email })
+                axios.post("https://summer-camp-server-sepia.vercel.app/jwt", { email: user.email })
                     .then(data => {
                         localStorage.setItem("secret-key", data.data.token);
                     })
