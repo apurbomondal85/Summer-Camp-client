@@ -14,11 +14,13 @@ import ManageUsers from "../page/Dashboard/Admin/ManageUsers";
 import Payment from "../page/Dashboard/Users/Payment";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import EnrollClass from "../page/Dashboard/Users/EnrollClass";
+import Error from "../page/ErrorPage/Error";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <Error />,
         children: [
             {
                 path: '/',
@@ -45,6 +47,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <Dashboard />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/dashboard/selected',
